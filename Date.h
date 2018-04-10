@@ -13,11 +13,11 @@ class SheelKumar::Date
     public:
     Date();
     Date(int monthToSet, int dayToSet, int yearToSet);
-    inline int getMonth();
-    inline int getDay();
-    inline int getYear();
+    inline int getMonth() const;
+    inline int getDay() const;
+    inline int getYear() const;
 
-    void display();
+    void display() const;
 
     private:
     int month;
@@ -26,7 +26,7 @@ class SheelKumar::Date
 
     const int default_month = 1;
 
-    bool isDateValid(int monthToCheck, int dayToCheck, int yearToCheck);
+    bool isDateValid(int monthToCheck, int dayToCheck, int yearToCheck) const;
 };
 
 #endif

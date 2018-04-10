@@ -23,27 +23,27 @@ Date::Date(int monthToSet, int dayToSet, int yearToSet)
     }
 }
 
-inline int Date::getMonth()
+inline int Date::getMonth() const
 {
     return month;
 }
 
-inline int Date::getDay()
+inline int Date::getDay() const
 {
     return day;
 }
 
-inline int Date::getYear()
+inline int Date::getYear() const
 {
     return year;
 }
 
-void Date::display()
+void Date::display() const
 {
     std::cout << month << "/" << day << "/" << year << "\n";
 }
 
-bool Date::isDateValid(int monthToCheck, int dayToCheck, int yearToCheck)
+bool Date::isDateValid(int monthToCheck, int dayToCheck, int yearToCheck) const
 {
     if (monthToCheck > 12 || monthToCheck < 1)
     {
