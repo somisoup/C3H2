@@ -1,5 +1,5 @@
-#ifndef SHEEL_DATE_H
-#define SHEEL_DATE_H
+#ifndef SHEELKUMAR_DATE_H
+#define SHEELKUMAR_DATE_H
 
 #include <iostream>
 
@@ -8,14 +8,14 @@ namespace SheelKumar
     class Date;
 }
 
-class Date
+class SheelKumar::Date
 {
     public:
     Date();
     Date(int monthToSet, int dayToSet, int yearToSet);
-    int getMonth();
-    int getDay();
-    int getYear();
+    inline int getMonth();
+    inline int getDay();
+    inline int getYear();
 
     void display();
 
@@ -26,7 +26,7 @@ class Date
 
     const int default_month = 1;
 
-    bool isMonthValid(int monthToCheck);
+    bool isDateValid(int monthToCheck, int dayToCheck, int yearToCheck);
 };
 
 #endif

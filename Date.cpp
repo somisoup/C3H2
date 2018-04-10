@@ -1,36 +1,39 @@
 #include "Date.h"
+#include <ctime>
+
+using SheelKumar::Date;
 
 Date::Date()
 {
+    time_t rawTime = time(0);
+    struct tm * curTime = localtime(&rawTime);
 
+    month = curTime->tm_mon + 1;
+    day = curTime->tm_mday;
+    year = curTime->tm_year;
 }
 
 Date::Date(int monthToSet, int dayToSet, int yearToSet)
 {
-    if (isMonthValid(monthToSet))
+    if (isDateValid(monthToSet, dayToSet, yearToSet))
     {
         month = monthToSet;
+        day = dayToSet;
+        year = yearToSet;
     }
-    else
-    {
-        month = default_month;
-    }
-
-    day = dayToSet;
-    year = yearToSet;
 }
 
-int Date::getMonth()
+inline int Date::getMonth()
 {
     return month;
 }
 
-int Date::getDay()
+inline int Date::getDay()
 {
     return day;
 }
 
-int Date::getYear()
+inline int Date::getYear()
 {
     return year;
 }
@@ -40,7 +43,7 @@ void Date::display()
     std::cout << month << "/" << day << "/" << year << "\n";
 }
 
-bool Date::isMonthValid(int monthToCheck)
+bool Date::isDateValid(int monthToCheck, int dayToCheck, int yearToCheck)
 {
     if (monthToCheck > 12 || monthToCheck < 1)
     {
