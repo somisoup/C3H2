@@ -3,18 +3,26 @@
 
 using SheelKumar::Date;
 
+// Default constructor uses current time
 Date::Date()
 {
+    // Needed to add to year value in time struct
+    const int BASE_YEAR = 1900;
+    
+    // Get local time
     time_t rawTime = time(0);
     struct tm * curTime = localtime(&rawTime);
 
-    month = curTime->tm_mon + 1;
+    // Assign values to member variables
+    month = curTime->tm_mon + 1; // tm struct uses 0-11 instead of 1-12
     day = curTime->tm_mday;
-    year = curTime->tm_year;
+    year = curTime->tm_year + BASE_YEAR; // tm struct counts years from 1900
 }
 
+// Additional constructor to set custom date
 Date::Date(int month, int day, int year)
 {
+    // If date is valid, assign member variables, otherwise print error
     if (isDateValid(month, day, year))
     {
         this->month = month;
@@ -27,22 +35,26 @@ Date::Date(int month, int day, int year)
     }
 }
 
+// Display date in MM/DD/YYYY
 void Date::display() const
 {
     std::cout << month << "/" << day << "/" << year << "\n";
 }
 
+// Determine if date passed in is valid (false if invalid, true if valid)
 bool Date::isDateValid(int month, int day, int year) const
 {
     bool isLeap = false;
     const int MIN_MONTH = 1;
     const int MAX_MONTH = 12;
     
+    // Check if year is a leap year
     if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0))
     {
         isLeap = true;
     }
 
+    // Check if month, day, and year are valid in that order
     if (month > MAX_MONTH || month < MIN_MONTH)
     {
         std::cerr << "Invalid month entered\n";
@@ -62,6 +74,7 @@ bool Date::isDateValid(int month, int day, int year) const
     return true;
 }
 
+// Determine if day is valid given the month and if it is a leapyear
 bool Date::isDayValid(int day, int month, bool isLeap) const
 {
     const int FEB = 2, APRIL = 4, JUNE = 6, SEPTEMBER = 9, NOVEMBER = 11;
@@ -71,6 +84,8 @@ bool Date::isDayValid(int day, int month, bool isLeap) const
     const int FEB_LEAP = 29;
     const int FEB_NONLEAP = 28;
 
+    // If day is 0 or negative, return false. Otherwise check if days are less than or equal to 30 for given months.
+    // Otherwise, check if day is valid for Feb if leap year or not. Finally, check if days are between 1-31 for all other months
     if (day <= MIN_DAYS)
     {
         return false;
