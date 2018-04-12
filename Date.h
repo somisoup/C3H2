@@ -10,23 +10,34 @@ namespace SheelKumar
 
 class SheelKumar::Date
 {
-    public:
+public:
     Date();
-    Date(int monthToSet, int dayToSet, int yearToSet);
-    inline int getMonth() const;
-    inline int getDay() const;
-    inline int getYear() const;
+    Date(int month, int day, int year);
+
+    inline int getMonth() const 
+    { 
+        return this->month; 
+    };
+
+    inline int getDay() const 
+    { 
+        return this->day; 
+    };
+
+    inline int getYear() const 
+    { 
+        return this->year; 
+    };
 
     void display() const;
 
-    private:
+private:
     int month;
     int day;
     int year;
 
-    const int default_month = 1;
-
-    bool isDateValid(int monthToCheck, int dayToCheck, int yearToCheck) const;
+    bool isDateValid(int month, int day, int year) const;
+    bool isDayValid(int day, int month, bool isLeap) const;
 };
 
 #endif
